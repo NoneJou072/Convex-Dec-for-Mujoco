@@ -1,4 +1,5 @@
 import re
+import os
 
 file_name = 'decomp'
 # exract the data
@@ -40,5 +41,9 @@ for id, block in enumerate(blocks):
     newblock = lines[0] + '\n' + lines[1] + '\n' + '\n'.join(vertex_lines + modified_face_lines)
 
     # 写入块内容到单独的文件
-    with open(f'output/{file_name}{id}.obj', 'w') as file:
+    # 检查目录是否存在，如果不存在则创建
+    directory = 'output'
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    with open(f'output/{file_name}{id}.obj', 'w+') as file:
         file.write(newblock)
